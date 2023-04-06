@@ -58,8 +58,7 @@ namespace ManageEmployeeDetails
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                response = client.PostAsJsonAsync("users", emp).Result;
-                
+                response = client.PostAsJsonAsync("users", emp).Result;                
             }
             catch (Exception ex)
             {
