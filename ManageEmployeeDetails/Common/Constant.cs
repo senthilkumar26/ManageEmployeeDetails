@@ -14,6 +14,7 @@ namespace ManageEmployeeDetails.Common
         public static string EmployeeEmailError = "Please Enter EmailID..!";
         public static string EmployeeStatusError = "Please Enter Status..!";
         public static string EmployeeGenderError = "Please Select Gender..!";
+        public static string MessageBoxCaption = "Alert";
         #endregion
         #region Gender Status
         public static string EmployeeGender = "male";

@@ -44,7 +44,7 @@ namespace ManageEmployeeDetails
 
             catch (Exception ex)
             {
-                MessageBox.Show("Client Get Request Exception :" + ex.Message);
+                MessageBox.Show("Client Get Request Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
             return data;
         }
@@ -62,7 +62,7 @@ namespace ManageEmployeeDetails
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Client Post Exception :" + ex.Message);
+                MessageBox.Show("Client Post Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
             return response;
         }
@@ -80,7 +80,7 @@ namespace ManageEmployeeDetails
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Client Delete Exception :" + ex.Message);
+                MessageBox.Show("Client Delete Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
             return response;
         }

@@ -16,13 +16,10 @@ namespace ManageEmployeeDetails
     public partial class Form1 : Form
     {
         public readonly IApiHelper apiService;
-        public Form1()
+        public Form1(IApiHelper service)
         {
             InitializeComponent();
-            if (apiService == null)
-            {
-                apiService = new ApiHelper();
-            }
+            apiService = service;
             apiService.SetUpHttpClient();            
         }
         private async void btnGetEmployee_Click(object sender, EventArgs e)
@@ -31,11 +28,11 @@ namespace ManageEmployeeDetails
             {
                 var res = await apiService.ClientGetRequest();
                 gvUser.DataSource = res.Data;
-                MessageBox.Show(res.ToString());
+                MessageBox.Show(res.ToString(), Constant.MessageBoxCaption);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Get Request Exception :" + ex.Message);
+                MessageBox.Show("Get Request Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -47,17 +44,17 @@ namespace ManageEmployeeDetails
                 {
                     var obj = GetUserDetails();
                     var result = apiService.ClientPostRequest(obj);
-                    MessageBox.Show(result.ToString());
+                    MessageBox.Show(result.ToString(), Constant.MessageBoxCaption);
                 }
                 else
                 {
-                    MessageBox.Show(res); 
+                    MessageBox.Show(res, Constant.MessageBoxCaption); 
                 }
                 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Save Exception :" + ex.Message);
+                MessageBox.Show("Save Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -66,11 +63,11 @@ namespace ManageEmployeeDetails
             {           
             int ID = Convert.ToInt32(textBox1.Text);
             var result = apiService.ClientDeleteRequest(ID);
-            MessageBox.Show(result.ToString());
+            MessageBox.Show(result.ToString(), Constant.MessageBoxCaption);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Delete Exception :" + ex.Message);
+                MessageBox.Show("Delete Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
         }
         private void gvEmployee_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -103,30 +100,38 @@ namespace ManageEmployeeDetails
         {
             try
             {
-            var data = (List<User>)gvUser.DataSource;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-            dt.Columns.Add("EmailID");
-            dt.Columns.Add("Gender");
-            dt.Columns.Add("Status");
-            foreach (var item in data)
-            {
-                var dr = dt.NewRow();
-                dr["ID"] = item.ID;
-                dr["Name"] = item.Name;
-                dr["EmailID"] = item.Email;
-                dr["Gender"] = item.Gender;
-                dr["Status"] = item.Status;
-                dt.Rows.Add(dr);
+                var data = (List<User>)gvUser.DataSource;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ID");
+                dt.Columns.Add("Name");
+                dt.Columns.Add("EmailID");
+                dt.Columns.Add("Gender");
+                dt.Columns.Add("Status");
+                if (data != null)
+                {
+                    foreach (var item in data)
+                    {
+                        var dr = dt.NewRow();
+                        dr["ID"] = item.ID;
+                        dr["Name"] = item.Name;
+                        dr["EmailID"] = item.Email;
+                        dr["Gender"] = item.Gender;
+                        dr["Status"] = item.Status;
+                        dt.Rows.Add(dr);
+                    }
+                    string filename = Constant.FilePath;
+                    dt.ToCSV(filename);
+                    MessageBox.Show("Exported Csv Successfully...!", Constant.MessageBoxCaption);
+                }
+
+                else
+                {
+                    MessageBox.Show("No data found...!", Constant.MessageBoxCaption);
+                }
             }
-            string filename = Constant.FilePath;
-            dt.ToCSV(filename);
-                MessageBox.Show("Exported Csv Successfully...!");
-            }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Export Exception :" + ex.Message);
+                MessageBox.Show("Export Exception :" + ex.Message, Constant.MessageBoxCaption);
             }
         }
 
@@ -143,19 +148,20 @@ namespace ManageEmployeeDetails
             else if (string.IsNullOrEmpty(textBox3.Text))
             {
                 return Constant.EmployeeEmailError;
+            }          
+            else if(radioButton2.Checked == false && radioButton3.Checked == false)
+            {
+                return Constant.EmployeeGenderError;
             }
             else if (string.IsNullOrEmpty(textBox4.Text))
             {
                 return Constant.EmployeeStatusError;
             }
-            else if(radioButton2.Checked == false && radioButton3.Checked == false)
-            {
-                return Constant.EmployeeGenderError;
-            }
             else
             {
                 return ("Success");
             }
+
         }
         private User GetUserDetails()
         {

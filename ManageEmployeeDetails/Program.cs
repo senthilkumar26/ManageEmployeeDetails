@@ -1,3 +1,6 @@
+using ManageEmployeeDetails.Interface;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +20,18 @@ namespace ManageEmployeeDetails
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var host = CreateHostBuilder().Build();
+            ServiceProvider = host.Services;
+            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+        }
+        public static IServiceProvider ServiceProvider { get; private set; }
+        static IHostBuilder CreateHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) => {
+                    services.AddTransient<IApiHelper, ApiHelper>();
+                    services.AddTransient<Form1>();
+                });
         }
     }
 }

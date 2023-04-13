@@ -15,14 +15,15 @@ namespace ManageEmployeeDetails.Test
             service.SetUpHttpClient();
         }
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetApi()
         {
             var res = service.ClientGetRequest();
             Assert.IsNotNull(res);
+            Assert.IsTrue(res.Result.Data.Count>0);
 
         }
         [TestMethod]
-        public void TestMethod2()
+        public void TestPostApi()
         {
             var obj = new User();
             obj.ID = 123;
@@ -32,13 +33,15 @@ namespace ManageEmployeeDetails.Test
             obj.Status = "Active";
             var res = service.ClientPostRequest(obj);
             Assert.IsNotNull(res);
+            Assert.IsTrue(res.StatusCode == System.Net.HttpStatusCode.OK);
         }
         [TestMethod]
-        public void TestMethod3()
+        public void TestDeleteApi()
         {
             int id = 123;
             var res = service.ClientDeleteRequest(id);
             Assert.IsNotNull(res);
+            Assert.IsTrue(res.StatusCode == System.Net.HttpStatusCode.OK);
         }
     }
 }
