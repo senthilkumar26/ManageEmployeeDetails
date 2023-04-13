@@ -24,7 +24,7 @@ namespace ManageEmployeeDetails.Common
         public static string FilePath = @"C:\Users\senth\source\repos\ManageEmployeeDetails\ManageEmployeeDetails\bin\Debug\CSVFile\test.csv";
         #endregion
         #region Token
-        public static string Token = "fall4107311259f5f33e70a5d85de34a2499b4401da69af0b1d835cd5ec0d56";
+        public static string Token = "bb06c4f8b4896fa675d458e96b117167fbb8e1ca86028ec7c6d6ff744e96b932";
         #endregion
     }
 }
