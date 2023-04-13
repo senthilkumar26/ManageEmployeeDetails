@@ -25,7 +25,7 @@ namespace ManageEmployeeDetails
             client.BaseAddress = new Uri("https://gorest.co.in/public-api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constant.Token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",Constant.Token);
         }
         /// <summary>
         /// Getting employee details from api
