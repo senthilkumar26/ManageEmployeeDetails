@@ -45,6 +45,8 @@ namespace ManageEmployeeDetails
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.btnExport = new System.Windows.Forms.Button();
             this.gvUser = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +62,7 @@ namespace ManageEmployeeDetails
             // 
             // btnAddEmployee
             // 
-            this.btnAddEmployee.Location = new System.Drawing.Point(301, 304);
+            this.btnAddEmployee.Location = new System.Drawing.Point(696, 304);
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Size = new System.Drawing.Size(111, 29);
             this.btnAddEmployee.TabIndex = 1;
@@ -97,7 +99,7 @@ namespace ManageEmployeeDetails
             // 
             // btnRemoveEmployee
             // 
-            this.btnRemoveEmployee.Location = new System.Drawing.Point(433, 304);
+            this.btnRemoveEmployee.Location = new System.Drawing.Point(305, 304);
             this.btnRemoveEmployee.Name = "btnRemoveEmployee";
             this.btnRemoveEmployee.Size = new System.Drawing.Size(108, 29);
             this.btnRemoveEmployee.TabIndex = 5;
@@ -127,7 +129,7 @@ namespace ManageEmployeeDetails
             // 
             this.textBox1.Location = new System.Drawing.Point(281, 41);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
+            this.textBox1.Size = new System.Drawing.Size(227, 27);
             this.textBox1.TabIndex = 8;
             // 
             // textBox2
@@ -148,7 +150,7 @@ namespace ManageEmployeeDetails
             // 
             this.textBox4.Location = new System.Drawing.Point(281, 219);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(125, 27);
+            this.textBox4.Size = new System.Drawing.Size(227, 27);
             this.textBox4.TabIndex = 11;
             // 
             // radioButton2
@@ -175,7 +177,7 @@ namespace ManageEmployeeDetails
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(566, 303);
+            this.btnExport.Location = new System.Drawing.Point(432, 304);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(114, 29);
             this.btnExport.TabIndex = 15;
@@ -190,15 +192,37 @@ namespace ManageEmployeeDetails
             this.gvUser.Name = "gvUser";
             this.gvUser.RowHeadersWidth = 51;
             this.gvUser.RowTemplate.Height = 29;
-            this.gvUser.Size = new System.Drawing.Size(515, 368);
+            this.gvUser.Size = new System.Drawing.Size(629, 368);
             this.gvUser.TabIndex = 16;
             this.gvUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvEmployee_CellContentClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(538, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnSearchbyEmpID_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(576, 304);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 29);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnClr_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 897);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gvUser);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.radioButton3);
@@ -217,6 +241,7 @@ namespace ManageEmployeeDetails
             this.Controls.Add(this.btnGetEmployee);
             this.Name = "Form1";
             this.Text = "ManageEmployeeDetails";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvUser)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -241,6 +266,8 @@ namespace ManageEmployeeDetails
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.DataGridView gvUser;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

@@ -2,6 +2,7 @@
 using ManageEmployeeDetails.Model;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -36,10 +37,25 @@ namespace ManageEmployeeDetails
             var data = new UserResponse();
             try
             {
-                DataTable dt = new DataTable();
                 var response = await client.GetAsync("users");
                 string res = await response.Content.ReadAsStringAsync();
-                data= JsonConvert.DeserializeObject<UserResponse>(res.ToString());              
+                data= JsonConvert.DeserializeObject<UserResponse>(res.ToString());               
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Client Get Request Exception :" + ex.Message, Constant.MessageBoxCaption);
+            }
+            return data;
+        }
+        public async Task<SingleUserResponse> ClientSearchbyEmpId(int Id)
+        {
+            var data = new SingleUserResponse();
+            try
+            {
+                var response = await client.GetAsync("users/"+ Id);
+                string res = await response.Content.ReadAsStringAsync();
+                data = JsonConvert.DeserializeObject<SingleUserResponse>(res.ToString());
             }
 
             catch (Exception ex)

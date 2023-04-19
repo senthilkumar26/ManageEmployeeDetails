@@ -13,6 +13,13 @@ namespace ManageEmployeeDetails.Model
 
         public List<User> Data { get; set; }
     }
+    public class SingleUserResponse
+    {
+        public int Code { get; set; }
+        public Meta Meta { get; set; }
+
+        public User Data { get; set; }
+    }
     public class Pagination
     {
         public int Total { get; set; }

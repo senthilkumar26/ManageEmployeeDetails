@@ -14,6 +14,6 @@ namespace ManageEmployeeDetails.Interface
         Task<UserResponse> ClientGetRequest();
         HttpResponseMessage ClientPostRequest(User emp);
         HttpResponseMessage ClientDeleteRequest(int id);
-
+        Task<SingleUserResponse> ClientSearchbyEmpId(int id);
     }
 }

@@ -28,7 +28,6 @@ namespace ManageEmployeeDetails
             {
                 var res = await apiService.ClientGetRequest();
                 gvUser.DataSource = res.Data;
-                MessageBox.Show(res.ToString(), Constant.MessageBoxCaption);
             }
             catch (Exception ex)
             {
@@ -44,7 +43,14 @@ namespace ManageEmployeeDetails
                 {
                     var obj = GetUserDetails();
                     var result = apiService.ClientPostRequest(obj);
-                    MessageBox.Show(result.ToString(), Constant.MessageBoxCaption);
+                    if(result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("Saved Successfully", Constant.MessageBoxCaption);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Saved UnSuccessfully", Constant.MessageBoxCaption);
+                    }
                 }
                 else
                 {
@@ -63,7 +69,14 @@ namespace ManageEmployeeDetails
             {           
             int ID = Convert.ToInt32(textBox1.Text);
             var result = apiService.ClientDeleteRequest(ID);
-            MessageBox.Show(result.ToString(), Constant.MessageBoxCaption);
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    MessageBox.Show("Removed Successfully", Constant.MessageBoxCaption);
+                }
+                else
+                {
+                    MessageBox.Show("Removed UnSuccessfully", Constant.MessageBoxCaption);
+                }
             }
             catch (Exception ex)
             {
@@ -166,7 +179,7 @@ namespace ManageEmployeeDetails
         private User GetUserDetails()
         {
             var obj = new User();
-            obj.ID = Convert.ToInt32(textBox1.Text);
+            //obj.ID = Convert.ToInt32(textBox1.Text);
             obj.Name = textBox2.Text;
             obj.Email = textBox3.Text;
             if (radioButton2.Checked)
@@ -179,6 +192,56 @@ namespace ManageEmployeeDetails
             }
             obj.Status = textBox4.Text;
             return obj;
+        }
+        private void FillFormControl(User user)
+        {
+            textBox1.Text= user.ID.ToString();
+            textBox2.Text = user.Name;
+            textBox3.Text = user.Email;
+            textBox4.Text = user.Status;
+            if(user.Gender.ToLower() == "male")
+            {
+                radioButton2.Checked = true;
+            }
+            else
+            {
+                radioButton3.Checked = true;
+            }
+        }
+        private async void btnSearchbyEmpID_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(textBox1.Text)){
+                    var res = await apiService.ClientSearchbyEmpId(Convert.ToInt32(textBox1.Text));
+                    FillFormControl(res.Data);
+                }
+                else
+                {
+                    MessageBox.Show("Please Enter Emp ID", Constant.MessageBoxCaption);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Get Request Exception :" + ex.Message, Constant.MessageBoxCaption);
+            }
+        }
+
+        private void btnClr_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            gvUser.DataSource = null;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btnAddEmployee.Visible = false;
         }
     }
 }

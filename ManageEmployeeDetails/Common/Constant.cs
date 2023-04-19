@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ManageEmployeeDetails.Common
         public static string EmployeeGenders = "female";
         #endregion
         #region FilePath
-        public static string FilePath = @"C:\Users\senth\source\repos\ManageEmployeeDetails\ManageEmployeeDetails\bin\Debug\CSVFile\test.csv";
+        public static string FilePath = Directory.GetCurrentDirectory() +"\\EmployeeDetails.csv";
         #endregion
         #region Token
         public static string Token = "bb06c4f8b4896fa675d458e96b117167fbb8e1ca86028ec7c6d6ff744e96b932";
